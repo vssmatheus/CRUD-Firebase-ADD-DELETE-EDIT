@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crud-firebase</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="fontawesome-free-5.1.0-web/css/v4-shims.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+	<!--link rel="stylesheet" type="text/css" href="css/estilos.css">-->
+	<script src="assets/js/bootstrap.min.js"></script>
+	
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body class="body body-responsive">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #f5f5f5; border-bottom: solid 1px #ccc; padding: 30px">
+		<a class="navbar-brand" href="#"><img src="marca_UEG_vertical_extenso_cromia.png" width="100px"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav" style="font-size: 15pt">
+		  <ul class="navbar-nav">
+			<li class="nav-item active" style="margin-right: 25px">
+			  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item" style="margin-right: 25px">
+			  <a class="nav-link" href="#">Lista</a>
+			</li>
+			<li class="nav-item" style="margin-right: 25px">
+			  <a class="nav-link" href="#">Add</a>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="contenedor-form col-xs-12 col-sm-4 col-md-4 table-bordered">
+				<div class="row" style="background-color: rgb(59, 136, 252); padding: inherit">
+						<h4 scope="row" style="color:#fff"><i class="fas fa-user-plus"></i>  Adicionar</h4>
+				</div>				
+				<br>
+				<div class="form-group">
+					<label for="nombre"><strong>Nome</strong></label>
+					<input class="form-control form-control-hover" type="text" name="nombre" id="nombre">	
+				</div>
+				
+				<div class="form-group">
+					<label for="apellido"><strong>Apelido</strong></label>
+					<input class="form-control" type="text" name="apellido" id="apellido">
+				</div>
+				
+				<div class="form-group">
+					<label for="sexo"><strong>Sexo</strong></label>
+					<select class="form-control" id="sexo" name="sexo" id="sexo">
+						<option>Masculino</option>
+						<option>Feminino</option>
+						<option>Outro</option>
+					</select>
+					<!--<input class="form-control" type="text" name="sexo" id="sexo">-->
+				</div>
+
+				<div class="form-group">
+					<label for="edad"><strong>Idade</strong></label>
+					<input class="form-control" type="number" name="edad" id="edad">	
+				</div>
+
+				<div class="form-group">
+					<label for="dni"><strong>COD</strong></label>
+					<input class="form-control" type="number" name="dni" id="dni">	
+				</div>
+				<hr>
+				<button class="btn btn-block btn-primary" id="guardar"><i class="fas fa-save"></i> Salvar</button>
+				<br>							
+			</div>
+			<br><br>		
+
+			<!--TABELA-->
+			<div class="contenedor-tabla col-xs-48 col-sm-8 col-md-8">
+				<table border="1px" class="table  table-bordered table-sm table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">Nome</th>
+							<th scope="col">Apelido</th>
+							<th scope="col">Sexo</th>
+							<th scope="col">Idade</th>
+							<th scope="col">COD</th>
+							<th scope="col">EDITAR</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">						
+					</tbody>
+				</table>
+				<button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#modalEliminar">
+					<i class="fas fa-user-minus"></i> Excluir</button>
+			</div>
+		</div>
+			
+	</div>
+	<hr>
+	
+
+	<!-- MODAL ELIMINAR -->
+		  	<div class="modal fade" id="modalEliminar" role="dialog">
+		    	<div class="modal-dialog ">
+			      <div class="modal-content">
+
+			    <div class="modal-header">
+					<h4 class="modal-title"><i class="far fa-trash-alt"></i> EXCLUIR</h4>
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          
+
+			        </div>
+			        <div class="modal-body">
+
+				          <div class="form-group">
+				          	<label for="dni-delete"><strong>COD</strong></label>
+				          	<input type="number" name="dni-delete" id="dni-delete" class="form-control" placeholder="Insira o COD da pessoa para excluir" >
+				          </div>
+
+				          <button class="btn btn-danger" id="eliminar-modal-delete" data-dismiss="modal">Concluir Exclusão</button>
+
+			        </div>
+
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+			        </div>
+			      </div>		      
+		    	</div>
+		  	</div>		  
+		</div>
+		<!--MODIFICAR-->
+		<div class="modal fade" id="modalModificar" role="dialog">
+
+		    	<div class="modal-dialog ">
+			      <div class="modal-content">
+
+			        <div class="modal-header">
+
+					<h4 class="modal-title"><i class="fas fa-edit"></i> EDITAR</h4>
+			         <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          
+
+			        </div>
+
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label for="dni"><strong>COD</strong></label>
+									<input class="form-control"  type="number" disabled="" name="dni" id="mod-dni">	
+								</div>
+				
+								<div class="form-group">
+									<label for="nombre"><strong>Nome</strong></label>
+									<input class="form-control" type="text" name="nombre" id="mod-nombre">	
+								</div>
+								
+								<div class="form-group">
+									<label for="apellido"><strong>Apelido</strong></label>
+									<input class="form-control" type="text" name="apellido" id="mod-apellido">
+								</div>
+				
+								<div class="form-group">
+										<label for="modsexo"><strong>Sexo</strong></label>
+										<select class="form-control" id="mod-sexo" name="sexo">
+											<option>Masculino</option>
+											<option>Feminino</option>
+											<option>Outro</option>
+										</select>
+										<!--<input class="form-control" type="text" name="sexo" id="sexo">-->
+									</div>
+				
+								<div class="form-group">
+									<label for="edad"><strong>Idade</strong></label>
+									<input class="form-control" type="number" name="edad" id="mod-edad">	
+								</div>
+				          <button class="btn btn-success btn-lg" id="modal-modificar" data-dismiss="modal" ><i class="fas fa-save"></i> Salvar</button>
+
+			        </div>
+
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+			        </div>
+			      </div>		      
+		    	</div>
+				</div>		  
+		</div>
+		<!-- FOOTER -->
+		<div style="padding-top: 60px; padding-top: 120px; padding-bottom: 30px; background-color: rgb(25, 18, 53)">
+				<footer class="container" style="color:#ffffff">
+						<p class="float-right"><a href="#" style="text-decoration:none; font-size: 25px; color:#f5f5f5">Topo <i class="fas fa-arrow-circle-up"></i></a></p>
+						<p class="float-block"><a href="http://www.ueg.br" style="color: #ccc; text-decoration: none">
+							Site |  <img src="marca_UEG_vertical_extenso_cromia_branco.png" width="80px"></a></p>
+						<p>&copy; 2018-2018 Matheus Vieira, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+				</footer>
+		</div>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+	<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="js/firebase.js"></script>
+
+</body>
+</html>
